@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(main)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_HOME_DIRECTORY}/cmake/Modules/")
+
+set(LLVM_LINK_COMPONENTS support)
+
+find_package(LibClang REQUIRED)
+add_definitions(-std=c++11)
+
+set(SOURCE_FILES src/main.cpp)
+include_directories(
+  ${LIBCLANG_INCLUDE_DIR}
+  )
+add_executable(
+  main
+  ${SOURCE_FILES}
+  )
+target_link_libraries(
+  main
+  ${LIBCLANG_LIBRARY}
+  )
