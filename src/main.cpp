@@ -16,9 +16,6 @@
 #include <clang/AST/RecursiveASTVisitor.h>
 #include <clang/ASTMatchers/ASTMatchFinder.h>
 #include <clang/ASTMatchers/ASTMatchers.h>
-
-// #include <clang/AST/DeclVisitor.h>
-
 #include <clang/Frontend/FrontendActions.h>
 #include <clang/Tooling/CompilationDatabase.h>
 #include <clang/Tooling/Tooling.h>
@@ -109,31 +106,6 @@ public:
 
 
 int main(int argc, char **argv) {
-  /*
-    if (argc < 2) {
-    cerr << "Use " << argv[0] << " source_file -- [clang_args]\n";
-    return 0;
-    }
-
-    // build compilation database
-    tooling::FixedCompilationDatabase *comp =
-    tooling::FixedCompilationDatabase::loadFromCommandLine(argc, const_cast<const char **> (argv));
-    if (!comp) {
-    cerr << "Failed to load compilation database\n";
-    return 1;
-    }
-
-    // process files
-    const string file(argv[1]);
-    vector<string> sources;
-    sources.push_back(file);
-    tooling::ClangTool tool(*comp, sources);
-    FrontendActionFactory act;
-    return (tool.run(&act) != 0);
-   */
-
-
-
   Dump Dump;
   MatchFinder Finder;
 
@@ -149,29 +121,3 @@ int main(int argc, char **argv) {
     tooling::runToolOnCode(new MyFrontendAction, StringRef(str));
   }
 }
-
-
-
-
-
-/*
-  class ASTConsumer : public ASTConsumer {
-  private:
-  MyVisitor _visitor;
-  public:
-  explicit ASTConsumer(ASTContext *Context) : MyVisitor(Context) {}
-
-  virtual bool HandleTopLevelDecl(DeclGroupRef D) {
-  DeclGroupRef::iterator it(D.begin ());
-  const DeclGroupRef::iterator itEnd(D.end ());
-  while (it != itEnd) {
-  Decl *decl(*it);
-  if (!_visitor.TraverseDecl(decl)) {
-  return false; 
-  }
-  ++it;
-  }
-  return true;
-  }
-  };
-*/
