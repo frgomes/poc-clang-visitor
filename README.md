@@ -1,5 +1,5 @@
 ## For the impatient
 
 ```bash
-    $ make clean; make; src/main test/getopt.c
+    $ make clean; make; src/main test/getopt.h
 ```
